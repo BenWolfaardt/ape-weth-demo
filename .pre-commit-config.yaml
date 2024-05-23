@@ -1,0 +1,36 @@
+default_language_version:
+  python: python3.11
+
+repos:
+  # dotenv-linter validates and maintains the quality of .env files.
+  - repo: https://github.com/wemake-services/dotenv-linter
+    rev: 0.5.0
+    hooks:
+      - id: dotenv-linter
+
+  # mypy checks type annotations.
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.10.0
+    hooks:
+      - id: mypy
+        args: [--config-file=pyproject.toml]
+
+  # pre-commit-hooks is a collection of Git hooks for code quality, formatting, and analysis.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-json
+      - id: check-yaml
+      - id: check-toml
+      - id: debug-statements
+
+  # An extremely fast Python linter and code formatter, written in Rust.
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.4.2
+    hooks:
+    -   id: ruff
+        args:
+        - --fix
+    -   id: ruff-format
