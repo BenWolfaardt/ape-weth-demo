@@ -1,6 +1,7 @@
 name: ape-weth-demo
 
 plugins:
+  - name: alchemy
   - name: ape-hardhat
   - name: solidity
     # version: 0.7.0
