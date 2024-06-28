@@ -1,5 +1,10 @@
 name: ape-weth-demo
 
 plugins:
-   - name: solidity
-     version: 0.7.0
+  - name: ape-hardhat
+  - name: solidity
+    # version: 0.7.0
+
+# for more config options see: https://github.com/ApeWorX/ape-hardhat
+hardhat:
+  host: 127.0.0.1:8555

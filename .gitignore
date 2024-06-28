@@ -2,6 +2,9 @@
 .build/
 .cache/
 
+# Node
+/node_modules/
+
 # Python
 .env
 .venv
