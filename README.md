@@ -13,6 +13,20 @@
   10.1 You can specify another chain/provider.  
   10.2 You can only specify something from: `ape networks list`
 
+## Test out the Waters
+
+```python
+from ape import networks
+from ape.managers.networks import NetworkManager
+from ape.api.providers import ProviderAPI
+from typing import cast
+
+networks: NetworkManager = networks
+alchemy = cast(ProviderAPI, networks.provider)
+
+print(alchemy.is_connected)
+```
+
 ## TODOs
 
 - [ ] As an exercise, see if you can make use of the approve and transferFrom
