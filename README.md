@@ -22,6 +22,7 @@
 ## Links
 
 - [User Guide - CLIs](https://docs.apeworx.io/ape/stable/userguides/clis.html?ref=snakecharmers.ethereum.org)
+- [Uniswap V2 - Contract walk-through](https://ethereum.org/en/developers/tutorials/uniswap-v2-annotated-code/)
 
 ## Notes
 
@@ -43,3 +44,18 @@ While you're writing and running tests, know that pytest's normal flags are avai
 `$ ape test --pdb`
 - multiple flags may be used:  
 `$ ape test --pdb -x -s -k depos`it
+
+### `ape-eth` Install
+
+When installing `ape-eth` if you chose to add the `"reccomended-plugings"` as extra arguments in `pyproject.yaml` note that the following will be included:
+
+- ape-alchemy (0.8.0)
+- ape-ens (0.8.0)
+- ape-etherscan (0.8.0)
+- ape-foundry (0.8.0)
+- ape-hardhat (0.8.0)
+- ape-infura (0.8.0)
+- ape-solidity (0.8.2)
+- ape-template (0.8.0)
+- ape-tokens (0.8.0)
+- ape-vyper (0.8.1)
