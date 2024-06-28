@@ -59,3 +59,19 @@ When installing `ape-eth` if you chose to add the `"reccomended-plugings"` as ex
 - ape-template (0.8.0)
 - ape-tokens (0.8.0)
 - ape-vyper (0.8.1)
+
+### Setting up `Hardhat`
+
+> Note: Ape generates a config in `$HOME/.ape/hardhat` to avoid configs but can use a local `ape-config.yaml` if configured.
+
+- See [documentation](https://github.com/ApeWorX/ape-hardhat)
+- Add to the `ape-config.yaml`
+- Install with: `npm install --save-dev hardhat`
+  - It was necessary to install globally to be able to find the `hardhat` binary
+  - `npm install -g hardhat` confirming it is installed with: `hardhat --version`
+- Now you can use the `--network ethereum:local:hardhat` with the `Ape CLI`
+- Use `ape networks list` to see available networks
+- `ape accounts generate <account_name> --word-count 24` saves encrypted file to `$HOME/.ape/accounts`
+  - `SUCCESS: A new account '0xe3f7A408a64E147e120f79Daa2973D890Cd9d830' with HDPath m/44'/60'/0'/0/0 has been added with the id 'test'`
+
+> You can now deploy a contract: `ape run deploy --network ethereum:sepolia:alchemy`. Ensuring that you have funds in your account for the relavent network.
