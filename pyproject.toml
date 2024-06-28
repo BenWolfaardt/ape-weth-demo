@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.11"
 
 click = "8.1.7"
-eth-ape = {version = "0.8.5", extras = ["recommended-plugins"]}
+eth-ape = "0.8.5"
 
 [tool.poetry.group.dev.dependencies]
 dotenv-linter = "0.5.0"
