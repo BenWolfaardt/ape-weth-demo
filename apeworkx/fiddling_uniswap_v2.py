@@ -1,5 +1,3 @@
-import json
-
 from decimal import Decimal
 
 from ape import Contract, networks
@@ -16,29 +14,16 @@ TOKEN0_ADDRESS = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"  # WETH
 TOKEN1_ADDRESS = "0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"  # USDC
 
 
-with open(".build/UniswapV2Factory.json") as f:
-    abi_factory: dict = json.load(f)
-with open(".build/UniswapV2Pair.json") as f:
-    abi_pair: dict = json.load(f)
-
-
 with networks.parse_network_choice("ethereum:mainnet:alchemy") as alchemy_provider:
     print(alchemy_provider.is_connected)
 
-    contract_factory = Contract(
-        address=UNISWAP_V2_FACTORY_ADDRESS,
-        # abi=[abi_factory]
-    )
-    # print(contract_factory.creation_metadata)
+    contract_factory = Contract(address=UNISWAP_V2_FACTORY_ADDRESS)
 
     pair_address = contract_factory.getPair(TOKEN0_ADDRESS, TOKEN1_ADDRESS)
     if pair_address == "0x0000000000000000000000000000000000000000":
         print("Pair does not exist.")
 
-    contract_pair = Contract(
-        address=pair_address,
-        # abi=[abi_pair]
-    )
+    contract_pair = Contract(address=pair_address)
 
     token0 = contract_pair.token0()
     token1 = contract_pair.token1()
