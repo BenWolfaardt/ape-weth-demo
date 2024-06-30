@@ -51,6 +51,7 @@ module = [
     "click.*",
     "dotenv.*",
     "pytest.*",
+    "pytz.*",
 ]
 ignore_missing_imports = true
 
