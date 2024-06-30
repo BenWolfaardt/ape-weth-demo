@@ -121,6 +121,59 @@ files = [
 ]
 
 [[package]]
+name = "ape-etherscan"
+version = "0.8.0"
+description = "ape-etherscan: Etherscan Explorer Plugin for Ethereum-based networks"
+optional = false
+python-versions = "<4,>=3.9"
+files = [
+    {file = "ape-etherscan-0.8.0.tar.gz", hash = "sha256:6f9fee57d0803221aeeb54afe22fc06adc5bab4a3d8dd8a18da5e3ac1bb56218"},
+    {file = "ape_etherscan-0.8.0-py3-none-any.whl", hash = "sha256:16bc4fc3e249303b27df04799be44d25615fc5fd02b536ac82f5a7214f224b77"},
+]
+
+[package.dependencies]
+eth-ape = ">=0.8.2,<0.9"
+ethpm-types = "*"
+requests = "*"
+yarl = "*"
+
+[package.extras]
+dev = ["IPython", "Sphinx (>=6.1.3,<7)", "ape-arbitrum", "ape-base", "ape-blast", "ape-bsc", "ape-fantom", "ape-infura", "ape-optimism", "ape-polygon", "ape-polygon-zkevm", "ape-solidity", "black (>=24.4.2,<25)", "commitizen", "flake8 (>=7.0.0,<8)", "flake8-breakpoint (>=1.1.0,<2)", "flake8-print (>=5.0.0,<6)", "hypothesis (>=6.2.0,<7)", "ipdb", "isort (>=5.13.2,<6)", "mdformat (>=0.7.17)", "mdformat-frontmatter (>=0.4.1)", "mdformat-gfm (>=0.3.5)", "mdformat-pyproject (>=0.0.1)", "mypy (>=1.10.0,<2)", "pre-commit", "pytest (>=6.0)", "pytest-cov", "pytest-mock", "pytest-watch", "pytest-xdist", "setuptools", "setuptools-scm", "sphinx-rtd-theme (>=1.2.0,<2)", "towncrier (>=19.2.0,<20)", "twine", "types-PyYAML", "types-requests (>=2.28.7)", "types-setuptools", "wheel"]
+doc = ["Sphinx (>=6.1.3,<7)", "sphinx-rtd-theme (>=1.2.0,<2)", "towncrier (>=19.2.0,<20)"]
+lint = ["black (>=24.4.2,<25)", "flake8 (>=7.0.0,<8)", "flake8-breakpoint (>=1.1.0,<2)", "flake8-print (>=5.0.0,<6)", "isort (>=5.13.2,<6)", "mdformat (>=0.7.17)", "mdformat-frontmatter (>=0.4.1)", "mdformat-gfm (>=0.3.5)", "mdformat-pyproject (>=0.0.1)", "mypy (>=1.10.0,<2)", "types-PyYAML", "types-requests (>=2.28.7)", "types-setuptools"]
+release = ["setuptools", "setuptools-scm", "twine", "wheel"]
+test = ["ape-arbitrum", "ape-base", "ape-blast", "ape-bsc", "ape-fantom", "ape-infura", "ape-optimism", "ape-polygon", "ape-polygon-zkevm", "ape-solidity", "hypothesis (>=6.2.0,<7)", "pytest (>=6.0)", "pytest-cov", "pytest-mock", "pytest-xdist"]
+
+[[package]]
+name = "ape-hardhat"
+version = "0.8.0"
+description = "ape-hardhat: Ape network provider for Hardhat"
+optional = false
+python-versions = "<4,>=3.8"
+files = [
+    {file = "ape-hardhat-0.8.0.tar.gz", hash = "sha256:66f9f947b2a43af294d5f01c63529eeb00e98272f201ecbfef98fa21e5e7f358"},
+    {file = "ape_hardhat-0.8.0-py3-none-any.whl", hash = "sha256:1a69a7d90fc589eee1ab1189ded4e5f0b6668d44c16ebbd486da61d7a82af26c"},
+]
+
+[package.dependencies]
+chompjs = ">=1.1.9,<2"
+eth-ape = ">=0.8.1,<0.9"
+ethpm-types = "*"
+evm-trace = "*"
+hexbytes = "*"
+packaging = "*"
+requests = "*"
+web3 = "*"
+yarl = ">=1.9.2,<2"
+
+[package.extras]
+dev = ["IPython", "Sphinx (>=6.1.3,<7)", "ape-alchemy", "ape-polygon", "black (>=24.4.2,<25)", "commitizen", "flake8 (>=7.0.0,<8)", "flake8-breakpoint (>=1.1.0,<2)", "flake8-print (>=5.0.0,<6)", "hypothesis (>=6.2.0,<7.0)", "ipdb", "isort (>=5.13.2,<6)", "mdformat (>=0.7.17)", "mdformat-frontmatter (>=0.4.1)", "mdformat-gfm (>=0.3.5)", "mdformat-pyproject (>=0.0.1)", "mypy (>=1.10.0,<2)", "myst-parser (>=1.0.0,<2)", "pre-commit", "pytest (>=6.0)", "pytest-cov", "pytest-mock", "pytest-watch", "pytest-xdist", "rich", "setuptools", "setuptools-scm", "sphinx-click (>=4.4.0,<5)", "sphinx-plausible (>=0.1.2,<0.2)", "sphinx-rtd-theme (>=1.2.0,<2)", "sphinxcontrib-napoleon (>=0.7)", "twine", "types-PyYAML", "types-requests", "types-setuptools", "wheel"]
+doc = ["Sphinx (>=6.1.3,<7)", "myst-parser (>=1.0.0,<2)", "sphinx-click (>=4.4.0,<5)", "sphinx-plausible (>=0.1.2,<0.2)", "sphinx-rtd-theme (>=1.2.0,<2)", "sphinxcontrib-napoleon (>=0.7)"]
+lint = ["black (>=24.4.2,<25)", "flake8 (>=7.0.0,<8)", "flake8-breakpoint (>=1.1.0,<2)", "flake8-print (>=5.0.0,<6)", "isort (>=5.13.2,<6)", "mdformat (>=0.7.17)", "mdformat-frontmatter (>=0.4.1)", "mdformat-gfm (>=0.3.5)", "mdformat-pyproject (>=0.0.1)", "mypy (>=1.10.0,<2)", "types-PyYAML", "types-requests", "types-setuptools"]
+release = ["setuptools", "setuptools-scm", "twine", "wheel"]
+test = ["ape-alchemy", "ape-polygon", "hypothesis (>=6.2.0,<7.0)", "pytest (>=6.0)", "pytest-cov", "pytest-mock", "pytest-xdist", "rich"]
+
+[[package]]
 name = "asttokens"
 version = "2.4.1"
 description = "Annotate AST trees with source code positions"
@@ -430,6 +483,16 @@ files = [
     {file = "charset_normalizer-3.3.2-cp39-cp39-win32.whl", hash = "sha256:aed38f6e4fb3f5d6bf81bfa990a07806be9d83cf7bacef998ab1a9bd660a581f"},
     {file = "charset_normalizer-3.3.2-cp39-cp39-win_amd64.whl", hash = "sha256:b01b88d45a6fcb69667cd6d2f7a9aeb4bf53760d7fc536bf679ec94fe9f3ff3d"},
     {file = "charset_normalizer-3.3.2-py3-none-any.whl", hash = "sha256:3e4d1f6587322d2788836a99c69062fbb091331ec940e02d12d179c1d53e25fc"},
+]
+
+[[package]]
+name = "chompjs"
+version = "1.2.4"
+description = "Parsing JavaScript objects into Python dictionaries"
+optional = false
+python-versions = ">=3"
+files = [
+    {file = "chompjs-1.2.4.tar.gz", hash = "sha256:e054507bbb32d0ae8fed8b5290397716562163a4286ef155db877d0f6ba30c9b"},
 ]
 
 [[package]]
@@ -3699,4 +3762,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "a1b4303b212b39aae71ded0887a1bb02470063f7a15136d431112b1f095c3e00"
+content-hash = "d0ca4cae8f7fe94949c319f9ad18148eae2bb298d3dfdc19e1e099414670766d"
