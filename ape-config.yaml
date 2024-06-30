@@ -3,9 +3,26 @@ name: ape-weth-demo
 plugins:
   - name: alchemy
   - name: ape-hardhat
+  - name: etherscan
   - name: solidity
     # version: 0.7.0
 
 # for more config options see: https://github.com/ApeWorX/ape-hardhat
 hardhat:
-  host: 127.0.0.1:8555
+  fork:
+    ethereum:
+      mainnet:
+        upstream_provider: alchemy
+        host: 127.0.0.1:8555
+        block_number: 20205559
+
+# NOTE: this is correct
+# ethereum:
+#   default_network: mainnet-fork
+#   mainnet_fork:
+#     default_provider: hardhat
+#
+# And can be used with:
+# from ape import chain
+# 
+# block = chain.provider.get_block("latest")
