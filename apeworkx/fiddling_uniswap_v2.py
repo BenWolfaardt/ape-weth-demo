@@ -38,10 +38,11 @@ with networks.parse_network_choice("ethereum:mainnet:alchemy") as alchemy_provid
     print(f"Raw Reserve0 (WETH): {reserve0_raw}")
     print(f"Raw Reserve1 (USDC): {reserve1_raw}")
 
-    if token0 == TOKEN1_ADDRESS and token1 == TOKEN0_ADDRESS:
-        reserve0 = Decimal(reserve0_raw) / Decimal(10**6)  # USDC in USDC
-        reserve1 = Decimal(reserve1_raw) / Decimal(10**18)  # WETH in ETH
-    else:
+    # Adjusting reserve assignments based on token addresses
+    if token0.lower() == TOKEN0_ADDRESS.lower():  # WETH is token0
+        reserve0 = Decimal(reserve0_raw) / Decimal(10**18)  # WETH in ETH
+        reserve1 = Decimal(reserve1_raw) / Decimal(10**6)  # USDC in USDC
+    else:  # USDC is token0
         reserve0 = Decimal(reserve1_raw) / Decimal(10**6)  # USDC in USDC
         reserve1 = Decimal(reserve0_raw) / Decimal(10**18)  # WETH in ETH
 
@@ -49,8 +50,11 @@ with networks.parse_network_choice("ethereum:mainnet:alchemy") as alchemy_provid
     print(f"Reserve1 (USDC): {reserve1} USDC")
 
     # Calculate the price of 1 WETH in USDC
-    price = reserve1 / reserve0
-    print(f"The price of 1 WETH in USDC is: {price} USDC")
+    if reserve0 > 0:
+        price = reserve1 / reserve0 * 10**24  # TODO: figure out why this constant?
+        print(f"The price of 1 WETH in USDC is: {price} USDC")
+    else:
+        print("Reserve0 is zero, unable to calculate price.")
 
     # Check the total supply of the liquidity pool tokens
     total_supply = contract_pair.totalSupply()
