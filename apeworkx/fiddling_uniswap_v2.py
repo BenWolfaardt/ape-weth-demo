@@ -15,7 +15,7 @@ TOKEN1_ADDRESS = "0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"  # USDC
 
 
 with networks.parse_network_choice("ethereum:mainnet:alchemy") as alchemy_provider:
-    print(alchemy_provider.is_connected)
+    print(f"Alchemy Provider connection status: {alchemy_provider.is_connected}")
 
     contract_factory = Contract(address=UNISWAP_V2_FACTORY_ADDRESS)
 
