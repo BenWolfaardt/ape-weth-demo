@@ -6,6 +6,8 @@ load_dotenv()
 
 
 with networks.parse_network_choice("ethereum:sepolia:alchemy") as alchemy_provider:
+    print(f"Alchemy Provider connection status: {alchemy_provider.is_connected}")
+
     print(f"{alchemy_provider.is_connected=}")
     print(f"{alchemy_provider.connection_str=}")  # TODO: leaks API Key
     print(f"{alchemy_provider.connection_id=}")
