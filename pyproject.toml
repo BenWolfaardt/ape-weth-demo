@@ -8,19 +8,19 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 
-ape-etherscan = "0.8.0"
-ape-hardhat = "0.8.0"
+ape-etherscan = "0.8.3"
+ape-hardhat = "0.8.1"
 click = "8.1.7"
-eth-ape = "0.8.5"
+eth-ape = "0.8.16"
 python-dotenv = "1.0.1"
 
 [tool.poetry.group.dev.dependencies]
 dotenv-linter = "0.5.0"
-mypy = "1.10.0"
-pre-commit = "3.7.0"
-pre-commit-hooks = "4.4.0"
-pytest = "8.2.2"
-ruff = "0.4.2"
+mypy = "1.11.2"
+pre-commit = "3.8.0"
+pre-commit-hooks = "4.6.0"
+pytest = "8.3.3"
+ruff = "0.6.9"
 
 [build-system]
 requires = ["poetry-core"]
