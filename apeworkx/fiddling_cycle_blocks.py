@@ -6,122 +6,78 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+block_number = 20892999
 
-def configure_and_fork_at_block_number(block_number: int) -> None:
-    with networks.parse_network_choice(
-        network_choice="ethereum:mainnet:alchemy",
-        provider_settings={
-            "host": "127.0.0.1:8555",
-            "block_number": "20892999",
-            "enable_hardhat_deployments": False,
-        },
-        # provider_settings={
-        #     "fork_block_number": str(block_number)
-        #     }
-    ) as alchemy_provider:
-        print(
-            f"{alchemy_provider.name.capitalize()} Provider connection status: {alchemy_provider.is_connected}"
-        )
+ecosystem_name = "ethereum"
+network_name = "mainnet"
+provider_name = "alchemy"
+# network_choice = f"{ecosystem_name}:{network_name}:{provider_name}"
+network_choice = f"{ecosystem_name}:{network_name}"
 
-        block = alchemy_provider.get_block("latest")
-        print(f"Latest retrieved block height is: {block.number}")
+provider_settings = {
+    "host": "127.0.0.1:8555",
+    # "upstream_provider": "alchemy",  # NOTE: note sure we can set it here
+    # "block_number": str(block_number),  # NOTE: the provider will get the latest block it can
+    "enable_hardhat_deployments": False,
+    # "fork_block_number": str(block_number)  # NOTE: the provider will get the latest block it can
+}
 
-        print(alchemy_provider.settings)
+with networks.parse_network_choice(
+    network_choice=network_choice, provider_settings=provider_settings
+) as provider:
+    print(f"{provider.name.capitalize()} Provider connection status: {provider.is_connected}")
 
-        fork_config = {
-            "host": "127.0.0.1:8556",
-            "upstream_provider": "alchemy",
-            "block_number": "20892999",
-            "enable_hardhat_deployments": True,
+    block = provider.get_block("latest")
+    print(f"Latest retrieved block height is: {block.number}")
+
+    print(provider.settings)
+
+    fork_provider_name = "hardhat"
+    fork_provider_settings = {
+        "host": "127.0.0.1:8556",
+        # "upstream_provider": "alchemy",
+        # "block_number": "20892999",
+        "enable_hardhat_deployments": True,
+    }
+
+    with networks.fork(
+        provider_name=fork_provider_name,
+        provider_settings=fork_provider_settings,
+        # block_number=block_number  # NOTE: .fork should automatically pick the latest block
+        #   https://discord.com/channels/922917176040640612/1004472541898870904/1258048955443576912
+    ) as provider_context:
+        # Current config
+        # print(provider_context.config.model_dump_json)
+        print(provider_context.settings)
+
+        block = provider_context.get_block("latest")
+        # block = provider_context.get_block(fork_provider_settings["block_number"])
+        print(f"Forked network block number: {block.number}")
+
+        blocks = range(20892999, 20892999)
+        for block_number in blocks:
+            block = provider_context.get_block(str(block_number))
+            print(f"Getting block data for block height: {block.number}")
+            time.sleep(0.3)
+
+        # Above this line works
+        # update_fork_config = {
+        #     "host": "127.0.0.1:8557",
+        #     # "upstream_provider": "alchemy",
+        #     "block_number": str(block_number),
+        #     "enable_hardhat_deployments": True,
+        # }
+        update_fork_config = {
+            "fork": {"ethereum": {"mainnet": {"upstream_provider": "alchemy", "block_number": "20891999"}}}
         }
 
-        with networks.fork(
-            provider_name="hardhat",
-            provider_settings=fork_config,
-            # block_number=block_number
-        ) as provider_context:
-            # Current config
-            # print(provider_context.config.model_dump_json)
-            print(provider_context.settings)
+        print("Updating settings")
+        # NOTE: results in a new connection to hardhat
+        provider_context.update_settings(update_fork_config)
 
-            # block = provider_context.get_block("latest")
-            block = provider_context.get_block(fork_config["block_number"])
-            print(f"Forked network block number: {block.number}")
+        print(provider_context.settings)
 
-            blocks = range(20892999, 20892999)
-            for block_number in blocks:
-                block = provider_context.get_block(str(block_number))
-                print(f"Getting block data for block height: {block.number}")
-                time.sleep(0.3)
-
-            # Above this line works
-            update_fork_config = {
-                "host": "127.0.0.1:8557",
-                "upstream_provider": "alchemy",
-                "block_number": str(block_number),
-                "enable_hardhat_deployments": True,
-            }
-
-            print("Updating settings")
-            # NOTE: results in a new connection to hardhat
-            provider_context.update_settings(update_fork_config)
-
-            print(provider_context.settings)
-
-            # Supossed new updated settings
-            # print(provider_context.config.model_dump)
-            block = provider_context.get_block("latest")
-            print(f"Forked network block number: {block.number}")
-
-
-if __name__ == "__main__":
-    block_number = 20898300
-    configure_and_fork_at_block_number(block_number)
-
-    # class HardhatForkConfig(BaseModel):
-    #     host: str
-    #     upstream_provider: str
-    #     block_number: int
-    #     enable_hardhat_deployments: bool
-
-    # config = {
-    #     'evm_version': None,
-    #     'host': None,
-    #     'manage_process': True,
-    #     'bin_path': None,
-    #     'request_timeout': 30,
-    #     'fork_request_timeout': 300,
-    #     'process_attempts': 5,
-    #     'hardhat_config_file': None,
-    #     'fork': {
-    #         'ethereum': {
-    #             'mainnet': {
-    #                 'host': '127.0.0.1:8555',
-    #                 'upstream_provider': 'alchemy',
-    #                 'block_number': block_number,
-    #                 'enable_hardhat_deployments': 'true'
-    #             }
-    #         }
-    #     }
-    # }
-
-    # config = {
-    #     'evm_version': None,
-    #     'host': None,
-    #     'manage_process': True,
-    #     'bin_path': None,
-    #     'request_timeout': 30,
-    #     'fork_request_timeout': 300,
-    #     'process_attempts': 5,
-    #     'hardhat_config_file': None,
-    #     'fork': {
-    #         'ethereum': {
-    #             'mainnet': HardhatForkConfig(
-    #                 host='127.0.0.1:8555',
-    #                 upstream_provider='alchemy',
-    #                 block_number=block_number,
-    #                 enable_hardhat_deployments=False
-    #             )
-    #         }
-    #     }
-    # }
+        # Supossed new updated settings
+        # print(provider_context.config.model_dump)
+        block = provider_context.get_block("latest")
+        print(f"Forked network block number: {block.number}")
