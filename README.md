@@ -89,3 +89,11 @@ When installing `ape-eth` if you chose to add the `"reccomended-plugings"` as ex
   - `SUCCESS: A new account '0xe3f7A408a64E147e120f79Daa2973D890Cd9d830' with HDPath m/44'/60'/0'/0/0 has been added with the id 'test'`
 
 > You can now deploy a contract: `ape run deploy --network ethereum:sepolia:alchemy`. Ensuring that you have funds in your account for the relavent network.
+
+### Python environment
+
+uv installs the Python version pinned in `.python-version` if it is missing.
+
+```bash
+uv sync
+```
